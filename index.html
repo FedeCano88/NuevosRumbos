@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevos Rumbos</title>
+    <!-- Bootstrap-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!--CSS -->
+    <link href="./css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Nuevos Rumbos</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#servicios">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nosotros">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header-->
+    <header class="jumbotron jumbotron-fluid text-white bg-primary text-center mb-5">
+        <div class="container">
+            <h1 class="display-4">Bienvenidos a Nuevos Rumbos</h1>
+            <p class="lead">Transporte seguro y confiable para niños con discapacidad.</p>
+        </div>
+    </header>
+
+    <!-- Inicio -->
+    <section id="inicio" class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="./image/5.png" class="img-fluid rounded" alt="Transporte seguro">
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-primary">Nuestro Compromiso</h2>
+                <p>Ofrecemos transporte especializado para niños con discapacidad, asegurando la máxima seguridad y
+                    comodidad en cada viaje. Nos comprometemos a llevar a cada niño a sus colegios, terapias, y hogares
+                    con la atención y cuidado que merecen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="container mt-5 py-5 bg-light">
+        <h2 class="text-center text-primary mb-4">Servicios</h2>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img src="./image/1.png" class="img-fluid mb-3 rounded-circle" alt="Servicio 1">
+                <h4>Transporte Escolar</h4>
+                <p>Brindamos un servicio de transporte seguro y confiable para que los niños lleguen a sus escuelas a
+                    tiempo y cómodamente.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="./image/2.png" class="img-fluid mb-3 rounded-circle" alt="Servicio 2">
+                <h4>Traslados a Terapias</h4>
+                <p>Nos encargamos de llevar a los niños a sus sesiones de terapia, asegurando que lleguen de manera
+                    segura y puntual.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="./image/3.png" class="img-fluid mb-3 rounded-circle" alt="Servicio 3">
+                <h4>Regreso a Casa</h4>
+                <p>Aseguramos un regreso seguro y cómodo a casa después de un día de colegio o terapia, con un cuidado
+                    personalizado para cada niño.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nosotros Section -->
+    <section id="nosotros" class="container mt-5 py-5">
+        <h2 class="text-center text-primary mb-4">Nosotros</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="https://via.placeholder.com/500x300" class="img-fluid rounded" alt="Nuestra historia">
+            </div>
+            <div class="col-md-6">
+                <p>Nuevos Rumbos es una empresa dedicada al transporte seguro de niños con discapacidad. Fundada en [año
+                    ficticio], nuestra misión es proporcionar un servicio de transporte inclusivo que promueva la
+                    seguridad y la comodidad. Con años de experiencia y un equipo capacitado, estamos comprometidos a
+                    ofrecer un servicio de calidad y a ser parte del apoyo que cada familia necesita.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="container mt-5 py-5 bg-light">
+        <h2 class="text-center text-primary mb-4">Contacto</h2>
+        <form action="form.php" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nombreApellido">Nombre y Apellido</label>
+                    <input type="text" class="form-control" id="nombreApellido" name="nombreApellido" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="barrio">Barrio</label>
+                <select class="form-control" id="barrio" name="barrio">
+                    <option value="" selected>Seleccione una opción</option> <!-- Opción predeterminada -->
+                </select>
+            </div>
+            <!-- Nuevo select para barrios de Ciudad de Buenos Aires -->
+            <div class="form-group" id="barrioCABAContainer" style="display: none;">
+                <label for="barrioCABA">Barrios de Ciudad de Buenos Aires</label>
+                <select class="form-control" id="barrioCABA" name="barrioCABA">
+                </select>
+            </div>
+            <div class="form-group">
+                <label>¿Es por obra social?</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="obraSocial" id="obraSocialSi" value="si">
+                    <label class="form-check-label" for="obraSocialSi">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="obraSocial" id="obraSocialNo" value="no" checked>
+                    <label class="form-check-label" for="obraSocialNo">No</label>
+                </div>
+            </div>
+            <div class="form-group" id="obraSocialNombreContainer" style="display: none;">
+                <label for="obraSocialNombre">Indique su obra social</label>
+                <input type="text" class="form-control" id="obraSocialNombre" name="obraSocialNombre">
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Nuevos Rumbos. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
