@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const barrios = [
+    const localidades = [
         "Ciudad de Buenos Aires",
         "Acassuso", "Aldo Bonzi", "Avellaneda", "Ballester", "Banfield", "Beccar", "Belén de Escobar", 
         "Benavídez", "Bernal", "Billinghurst", "Bosques", "Boulogne", "Canning", "Carupá", "Caseros", 
@@ -23,36 +23,50 @@ document.addEventListener('DOMContentLoaded', function() {
         "Villa Tesei", "Villa Udaondo", "Virreyes", "Wilde", "William Morris"
     ];
 
-    const barriosCABA = [
+    const localidadesCABA = [
         "Belgrano", "Núñez", "Liniers", "Palermo", "Recoleta", "Villa Urquiza", "Almagro", "Caballito", 
         "San Telmo", "Flores", "Boedo", "Retiro", "Monserrat", "Barracas", "Constitución", "Chacarita", 
         "Villa Devoto", "Villa del Parque", "Villa Lugano", "Parque Patricios", "Puerto Madero"
     ];
 
-    const barrioSelect = document.getElementById('barrio');
+    const localidadSelect = document.getElementById('localidad');
+    const localidadServicioSelect = document.getElementById('localidadServicio');
     const barrioCABASelect = document.getElementById('barrioCABA');
-    const barrioCABAContainer = document.getElementById('barrioCABAContainer'); // Contenedor del select
+    const barrioCABAServicioSelect = document.getElementById('barrioCABAServicio');
+    const barrioCABAContainerLocalidad = document.getElementById('barrioCABAContainerLocalidad');
+    const barrioCABAContainerServicio = document.getElementById('barrioCABAContainerServicio');
 
-    barrios.forEach(function(barrio) {
+    localidades.forEach(function(localidad) {
         const option = document.createElement('option');
-        option.value = barrio;
-        option.textContent = barrio;
-        barrioSelect.appendChild(option);
+        option.value = localidad;
+        option.textContent = localidad;
+        localidadSelect.appendChild(option);
+        localidadServicioSelect.appendChild(option.cloneNode(true));
     });
 
-    barriosCABA.forEach(function(barrio) {
+    localidadesCABA.forEach(function(barrio) {
         const option = document.createElement('option');
         option.value = barrio;
         option.textContent = barrio;
         barrioCABASelect.appendChild(option);
+        barrioCABAServicioSelect.appendChild(option.cloneNode(true));
     });
 
-    barrioSelect.addEventListener('change', function() {
-        if (barrioSelect.value === "Ciudad de Buenos Aires") {
-            barrioCABAContainer.style.display = 'block';  // Mostrar select de barrios de CABA
+    localidadSelect.addEventListener('change', function() {
+        if (localidadSelect.value === "Ciudad de Buenos Aires") {
+            barrioCABAContainerLocalidad.style.display = 'block';
         } else {
-            barrioCABAContainer.style.display = 'none';  // Ocultar select de barrios de CABA
-            barrioCABASelect.selectedIndex = 0; // Reiniciar selección de barrios CABA
+            barrioCABAContainerLocalidad.style.display = 'none';
+            barrioCABASelect.selectedIndex = 0;
+        }
+    });
+
+    localidadServicioSelect.addEventListener('change', function() {
+        if (localidadServicioSelect.value === "Ciudad de Buenos Aires") {
+            barrioCABAContainerServicio.style.display = 'block';
+        } else {
+            barrioCABAContainerServicio.style.display = 'none';
+            barrioCABAServicioSelect.selectedIndex = 0;
         }
     });
 
@@ -73,6 +87,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Tu código existente...
+
+    // Seleccionar el botón de envío
+    const submitButton = document.querySelector('button[type="submit"]');
+
+    // Agregar evento de clic
+    submitButton.addEventListener('click', function(event) {
+        event.preventDefault();  // Previene el envío del formulario
+
+        // Mostrar alerta de SweetAlert2
+        Swal.fire({
+            icon: 'success',
+            title: 'Mensaje enviado',
+            text: 'Tu mensaje ha sido enviado con éxito.',
+            confirmButtonText: 'Aceptar'
+        });
+    });
+
+    // Tu código existente...
+});
+
 
 
 

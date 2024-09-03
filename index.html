@@ -10,6 +10,9 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!--CSS -->
     <link href="./css/style.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 </head>
 
 <body>
@@ -43,7 +46,7 @@
     <!-- Header-->
     <header class="jumbotron jumbotron-fluid text-white bg-primary text-center mb-5">
         <div class="container">
-            <h1 class="display-4">Bienvenidos a Nuevos Rumbos</h1>
+            <h1 class="display-4 text-gradient">Bienvenidos a Nuevos Rumbos</h1>
             <p class="lead">Transporte seguro y confiable para niños con discapacidad.</p>
         </div>
     </header>
@@ -55,7 +58,7 @@
                 <img src="./image/5.png" class="img-fluid rounded" alt="Transporte seguro">
             </div>
             <div class="col-md-6">
-                <h2 class="text-primary">Nuestro Compromiso</h2>
+                <h2 class="text-center text-primary mb-4">Nuestro Compromiso</h2>
                 <p>Ofrecemos transporte especializado para niños con discapacidad, asegurando la máxima seguridad y
                     comodidad en cada viaje. Nos comprometemos a llevar a cada niño a sus colegios, terapias, y hogares
                     con la atención y cuidado que merecen.</p>
@@ -93,7 +96,7 @@
         <h2 class="text-center text-primary mb-4">Nosotros</h2>
         <div class="row">
             <div class="col-md-6">
-                <img src="https://via.placeholder.com/500x300" class="img-fluid rounded" alt="Nuestra historia">
+                <img src="./image/6.png" class="img-fluid rounded" alt="Nuestra historia">
             </div>
             <div class="col-md-6">
                 <p>Nuevos Rumbos es una empresa dedicada al transporte seguro de niños con discapacidad. Fundada en [año
@@ -106,28 +109,42 @@
 
     <!-- Contacto Section -->
     <section id="contacto" class="container mt-5 py-5 bg-light">
-        <h2 class="text-center text-primary mb-4">Contacto</h2>
+        <h2 class="text-center text-primary mb-4 ">Contacto</h2>
         <form action="form.php" method="post">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="nombreApellido">Nombre y Apellido</label>
-                    <input type="text" class="form-control" id="nombreApellido" name="nombreApellido" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="telefono">Teléfono</label>
-                    <input type="tel" class="form-control" id="telefono" name="telefono" required>
-                </div>
+            <div class="form-group">
+                <label for="nombreApellido">Nombre y Apellido</label>
+                <input type="text" class="form-control" id="nombreApellido" name="nombreApellido" required>
             </div>
             <div class="form-group">
-                <label for="barrio">Barrio</label>
-                <select class="form-control" id="barrio" name="barrio">
-                    <option value="" selected>Seleccione una opción</option> <!-- Opción predeterminada -->
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" class="form-control" id="telefono" name="telefono" required>
+            </div>
+            <div class="form-group">
+                <label for="localidad">Localidad</label>
+                <select class="form-control" id="localidad" name="localidad">
+                    <option value="" selected>Seleccione una opción</option>
                 </select>
             </div>
-            <!-- Nuevo select para barrios de Ciudad de Buenos Aires -->
-            <div class="form-group" id="barrioCABAContainer" style="display: none;">
+            <!-- Select para barrios de Ciudad de Buenos Aires relacionado a Localidad -->
+            <div class="form-group" id="barrioCABAContainerLocalidad" style="display: none;">
                 <label for="barrioCABA">Barrios de Ciudad de Buenos Aires</label>
                 <select class="form-control" id="barrioCABA" name="barrioCABA">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="localidadServicio">Localidad donde se realizará el servicio</label>
+                <select class="form-control" id="localidadServicio" name="localidadServicio">
+                    <option value="" selected>Seleccione una opción</option>
+                </select>
+            </div>
+            <!-- Select para barrios de Ciudad de Buenos Aires relacionado a Localidad donde se realizará el servicio -->
+            <div class="form-group" id="barrioCABAContainerServicio" style="display: none;">
+                <label for="barrioCABAServicio">Barrios de Ciudad de Buenos Aires</label>
+                <select class="form-control" id="barrioCABAServicio" name="barrioCABAServicio">
                 </select>
             </div>
             <div class="form-group">
@@ -146,7 +163,8 @@
                 <input type="text" class="form-control" id="obraSocialNombre" name="obraSocialNombre">
             </div>
             <div class="form-group">
-                <label for="mensaje">Mensaje</label>
+                <label for="mensaje">Mensaje <small>(Especificar días y horarios del servicio, por ejemplo: Lunes,
+                        Miércoles, Viernes de 18hs a 19hs)</small></label>
                 <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Enviar</button>
@@ -159,6 +177,8 @@
     </footer>
 
     <!-- Bootstrap JS -->
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
