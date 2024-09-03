@@ -17,16 +17,21 @@ exports.handler = async (event, context) => {
     const { nombreApellido, email, telefono, mensaje } = JSON.parse(event.body);
 
     let transporter = nodemailer.createTransport({
-        service: 'Outlook', // Cambia por tu servicio de correo, por ejemplo, Gmail
+        host: 'smtp-mail.outlook.com',
+        port: 587,
+        secure: false, // true para 465, false para otros puertos
         auth: {
-            user: process.env.EMAIL_USER, // Usa variables de entorno para mayor seguridad
-            pass: process.env.EMAIL_PASS  // Usa variables de entorno para mayor seguridad
+            user: process.env.EMAIL_USER, // tu cuenta de Hotmail
+            pass: process.env.EMAIL_PASS  // la nueva contraseña de aplicación
+        },
+        tls: {
+            ciphers: 'SSLv3' // Asegura el uso de un protocolo seguro
         }
     });
 
     const mailOptions = {
         from: process.env.EMAIL_USER,
-        to: 'fedecano1988@hotmail.com', // Reemplaza con tu dirección de correo
+        to: 'fedecano1988@hotmail.com', // Reemplaza con tu dirección de correo de destino
         subject: 'Nuevo mensaje desde el formulario',
         text: `Nombre y Apellido: ${nombreApellido}\nEmail: ${email}\nTeléfono: ${telefono}\nMensaje: ${mensaje}`
     };
