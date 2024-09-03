@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
     const { nombreApellido, email, telefono, mensaje } = JSON.parse(event.body);
 
     let transporter = nodemailer.createTransport({
-        service: 'Hotmail', // Cambia por tu servicio de correo, por ejemplo, Gmail
+        service: 'Outlook', // Cambia por tu servicio de correo, por ejemplo, Gmail
         auth: {
             user: process.env.EMAIL_USER, // Usa variables de entorno para mayor seguridad
             pass: process.env.EMAIL_PASS  // Usa variables de entorno para mayor seguridad
