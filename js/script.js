@@ -1,32 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     const localidades = [
-        "Ciudad de Buenos Aires",
-        "Acassuso", "Aldo Bonzi", "Avellaneda", "Ballester", "Banfield", "Beccar", "Belén de Escobar", 
-        "Benavídez", "Bernal", "Billinghurst", "Bosques", "Boulogne", "Canning", "Carupá", "Caseros", 
-        "Castelar", "Ciudad Evita", "Ciudadela", "Del Viso", "Dock Sud", "Don Bosco", "Don Torcuato", 
-        "El Jagüel", "El Libertador", "El Palomar", "Escalada", "Ezpeleta", "Fátima", "Florida", 
-        "Florencio Varela", "Garín", "Gerli", "Gobernador Costa", "González Catán", "Grand Bourg", 
-        "Haedo", "Hudson", "Hurlingham Centro", "Ingeniero Adolfo Sourdeaux", "Ingeniero Allan", 
-        "Ingeniero Maschwitz", "Ingeniero Pablo Nogués", "Isidro Casanova", "Ituzaingó Norte", 
-        "Ituzaingó Sur", "José C. Paz Centro", "José León Suárez", "La Lucila", "La Matanza", 
-        "La Tablada", "Lanús Este", "Lanús Oeste", "Llavallol", "Loma Hermosa", "Lomas de Zamora", 
-        "Los Polvorines", "Luján", "Malvinas Argentinas", "Manuel Alberti", "Martínez", "Matheu", 
-        "Maquinista Savio", "Merlo Centro", "Monte Grande", "Morón", "Munro", "Olivos", 
-        "Parque San Martín", "Piñeiro", "Plátanos", "Quilmes Oeste", "Quilmes", "Ramos Mejía", 
-        "Ranelagh", "Recoleta", "Remedios de Escalada", "Rincón de Milberg", "San Andrés", 
-        "San Antonio de Padua", "San Fernando", "San Isidro", "San Justo", "San Martín", "San Miguel", 
-        "San Vicente", "Sarandí", "Santos Lugares", "Sourigues", "Tapiales", "Temperley", 
-        "Tigre Centro", "Tortuguitas", "Tristán Suárez", "Tres de Febrero", "Troncos del Talar", 
-        "Turdera", "Vicente López", "Victoria", "Villa Adelina", "Villa Ballester", "Villa Bosch", 
-        "Villa Brown", "Villa Dominico", "Villa España", "Villa La Florida", "Villa Luzuriaga", 
-        "Villa Lynch", "Villa Madero", "Villa Martelli", "Villa Raffo", "Villa Sarmiento", 
-        "Villa Tesei", "Villa Udaondo", "Virreyes", "Wilde", "William Morris"
+        // Lista de localidades...
     ];
 
     const localidadesCABA = [
-        "Belgrano", "Núñez", "Liniers", "Palermo", "Recoleta", "Villa Urquiza", "Almagro", "Caballito", 
-        "San Telmo", "Flores", "Boedo", "Retiro", "Monserrat", "Barracas", "Constitución", "Chacarita", 
-        "Villa Devoto", "Villa del Parque", "Villa Lugano", "Parque Patricios", "Puerto Madero"
+        // Lista de barrios de CABA...
     ];
 
     const localidadSelect = document.getElementById('localidad');
@@ -36,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const barrioCABAContainerLocalidad = document.getElementById('barrioCABAContainerLocalidad');
     const barrioCABAContainerServicio = document.getElementById('barrioCABAContainerServicio');
 
+    // Llenar select con localidades...
     localidades.forEach(function(localidad) {
         const option = document.createElement('option');
         option.value = localidad;
@@ -52,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         barrioCABAServicioSelect.appendChild(option.cloneNode(true));
     });
 
+    // Mostrar u ocultar select de barrios de CABA...
     localidadSelect.addEventListener('change', function() {
         if (localidadSelect.value === "Ciudad de Buenos Aires") {
             barrioCABAContainerLocalidad.style.display = 'block';
@@ -70,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Mostrar/ocultar el campo de obra social según la selección del usuario
+    // Mostrar/ocultar campo de obra social según selección...
     const obraSocialSi = document.getElementById('obraSocialSi');
     const obraSocialNo = document.getElementById('obraSocialNo');
     const obraSocialNombreContainer = document.getElementById('obraSocialNombreContainer');
@@ -86,15 +66,10 @@ document.addEventListener('DOMContentLoaded', function() {
             obraSocialNombreContainer.style.display = 'none';
         }
     });
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Tu código existente...
-
-    // Seleccionar el botón de envío
+    // Elimina el evento de clic en el botón de envío para evitar conflictos
+    /*
     const submitButton = document.querySelector('button[type="submit"]');
-
-    // Agregar evento de clic
     submitButton.addEventListener('click', function(event) {
         event.preventDefault();  // Previene el envío del formulario
 
@@ -106,23 +81,40 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmButtonText: 'Aceptar'
         });
     });
+    */
 
-    document.getElementById('contactForm').addEventListener('submit', async function (event) {
+    // Manejo del envío del formulario
+    document.getElementById('contactForm').addEventListener('submit', async function(event) {
         event.preventDefault();
 
         const formData = new FormData(event.target);
         const data = Object.fromEntries(formData);
 
-        const response = await fetch('/.netlify/functions/sendEmail', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: { 'Content-Type': 'application/json' }
-        });
+        try {
+            const response = await fetch('/.netlify/functions/sendEmail', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-        const result = await response.json();
-        alert(result.message);
+            const result = await response.json();
+            Swal.fire({
+                icon: response.ok ? 'success' : 'error',
+                title: response.ok ? 'Mensaje enviado' : 'Error',
+                text: result.message,
+                confirmButtonText: 'Aceptar'
+            });
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo enviar el mensaje. Por favor, inténtalo de nuevo más tarde.',
+                confirmButtonText: 'Aceptar'
+            });
+        }
     });
 });
+
 
 
 
