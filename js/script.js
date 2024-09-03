@@ -107,7 +107,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Tu código existente...
+    document.getElementById('contactForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData);
+
+        const response = await fetch('/.netlify/functions/sendEmail', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        const result = await response.json();
+        alert(result.message);
+    });
 });
 
 

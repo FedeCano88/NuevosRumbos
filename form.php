@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Dirección de correo electrónico a la que se enviará el formulario
-    $destinatario = "pablo@mail.com";  // Reemplaza con tu dirección de correo electrónico
+    $destinatario = "fedecano1988@hotmail.com";  // Reemplaza con tu dirección de correo electrónico
     $asunto = "Nuevo mensaje de contacto de Nuevos Rumbos";
 
     // Construir el cuerpo del correo electrónico
