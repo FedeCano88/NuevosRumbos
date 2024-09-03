@@ -17,7 +17,6 @@ exports.handler = async (event, context) => {
         };
     }
 
-    // Capturar todos los datos del formulario
     const { nombreApellido, email, telefono, mensaje, localidad, barrioCABA, localidadServicio, barrioCABAServicio, obraSocial, obraSocialNombre } = JSON.parse(event.body);
     console.log("Parsed request body:", { nombreApellido, email, telefono, mensaje, localidad, barrioCABA, localidadServicio, barrioCABAServicio, obraSocial, obraSocialNombre });
 
@@ -34,37 +33,40 @@ exports.handler = async (event, context) => {
         }
     });
 
-    // Construir el cuerpo del correo dinámicamente basado en la información proporcionada
+    // Crear el cuerpo del correo en formato HTML
     let emailBody = `
-        Nombre y Apellido: ${nombreApellido}
-        Email: ${email}
-        Teléfono: ${telefono}
-        Localidad: ${localidad}
-        Localidad del Servicio: ${localidadServicio}
-        Mensaje: ${mensaje}
+        <p><strong>Nombre y Apellido:</strong> ${nombreApellido}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Teléfono:</strong> ${telefono}</p>
+        <p><strong>Localidad:</strong> ${localidad}</p>
+        <p><strong>Localidad del Servicio:</strong> ${localidadServicio}</p>
     `;
 
     // Solo incluir los barrios de CABA si la localidad es "Ciudad de Buenos Aires"
     if (localidad === "Ciudad de Buenos Aires") {
-        emailBody += `Barrio (CABA): ${barrioCABA}\n`;
+        emailBody += `<p><strong>Barrio (CABA):</strong> ${barrioCABA}</p>`;
     }
 
     if (localidadServicio === "Ciudad de Buenos Aires") {
-        emailBody += `Barrio del Servicio (CABA): ${barrioCABAServicio}\n`;
+        emailBody += `<p><strong>Barrio del Servicio (CABA):</strong> ${barrioCABAServicio}</p>`;
     }
 
     // Solo incluir la información de obra social si se seleccionó "Sí"
     if (obraSocial === "Sí") {
-        emailBody += `Obra Social: Sí\nNombre de la Obra Social: ${obraSocialNombre || 'No especificado'}\n`;
+        emailBody += `<p><strong>Obra Social:</strong> Sí</p>`;
+        emailBody += `<p><strong>Nombre de la Obra Social:</strong> ${obraSocialNombre || 'No especificado'}</p>`;
     } else {
-        emailBody += `Obra Social: No\n`;
+        emailBody += `<p><strong>Obra Social:</strong> No</p>`;
     }
+
+    // Añadir el mensaje al final
+    emailBody += `<p><strong>Mensaje:</strong> ${mensaje}</p>`;
 
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: 'fedecano1988@hotmail.com', // Reemplaza con tu dirección de correo de destino
         subject: 'Nuevo mensaje desde el formulario',
-        text: emailBody
+        html: emailBody // Usar el formato HTML
     };
 
     try {
@@ -85,6 +87,7 @@ exports.handler = async (event, context) => {
         };
     }
 };
+
 
 
 
