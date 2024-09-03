@@ -17,9 +17,9 @@ exports.handler = async (event, context) => {
         };
     }
 
-    // Capturar todos los datos del formulario, incluyendo obra social
-    const { nombreApellido, email, telefono, mensaje, localidad, barrioCABA, localidadServicio, barrioCABAServicio, obraSocial } = JSON.parse(event.body);
-    console.log("Parsed request body:", { nombreApellido, email, telefono, mensaje, localidad, barrioCABA, localidadServicio, barrioCABAServicio, obraSocial });
+    // Capturar todos los datos del formulario
+    const { nombreApellido, email, telefono, mensaje, localidad, barrioCABA, localidadServicio, barrioCABAServicio, obraSocial, obraSocialNombre } = JSON.parse(event.body);
+    console.log("Parsed request body:", { nombreApellido, email, telefono, mensaje, localidad, barrioCABA, localidadServicio, barrioCABAServicio, obraSocial, obraSocialNombre });
 
     let transporter = nodemailer.createTransport({
         host: 'smtp-mail.outlook.com',
@@ -34,22 +34,37 @@ exports.handler = async (event, context) => {
         }
     });
 
-    // Incluir todos los campos, incluyendo obra social, en el cuerpo del correo
+    // Construir el cuerpo del correo dinámicamente basado en la información proporcionada
+    let emailBody = `
+        Nombre y Apellido: ${nombreApellido}
+        Email: ${email}
+        Teléfono: ${telefono}
+        Localidad: ${localidad}
+        Localidad del Servicio: ${localidadServicio}
+        Mensaje: ${mensaje}
+    `;
+
+    // Solo incluir los barrios de CABA si la localidad es "Ciudad de Buenos Aires"
+    if (localidad === "Ciudad de Buenos Aires") {
+        emailBody += `Barrio (CABA): ${barrioCABA}\n`;
+    }
+
+    if (localidadServicio === "Ciudad de Buenos Aires") {
+        emailBody += `Barrio del Servicio (CABA): ${barrioCABAServicio}\n`;
+    }
+
+    // Solo incluir la información de obra social si se seleccionó "Sí"
+    if (obraSocial === "Sí") {
+        emailBody += `Obra Social: Sí\nNombre de la Obra Social: ${obraSocialNombre || 'No especificado'}\n`;
+    } else {
+        emailBody += `Obra Social: No\n`;
+    }
+
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: 'fedecano1988@hotmail.com', // Reemplaza con tu dirección de correo de destino
         subject: 'Nuevo mensaje desde el formulario',
-        text: `
-            Nombre y Apellido: ${nombreApellido}
-            Email: ${email}
-            Teléfono: ${telefono}
-            Localidad: ${localidad}
-            Barrio (CABA): ${barrioCABA}
-            Localidad del Servicio: ${localidadServicio}
-            Barrio del Servicio (CABA): ${barrioCABAServicio}
-            Obra Social: ${obraSocial}
-            Mensaje: ${mensaje}
-        `
+        text: emailBody
     };
 
     try {
@@ -70,5 +85,6 @@ exports.handler = async (event, context) => {
         };
     }
 };
+
 
 

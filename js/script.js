@@ -89,22 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Elimina el evento de clic en el botón de envío para evitar conflictos
-    /*
-    const submitButton = document.querySelector('button[type="submit"]');
-    submitButton.addEventListener('click', function(event) {
-        event.preventDefault();  // Previene el envío del formulario
-
-        // Mostrar alerta de SweetAlert2
-        Swal.fire({
-            icon: 'success',
-            title: 'Mensaje enviado',
-            text: 'Tu mensaje ha sido enviado con éxito.',
-            confirmButtonText: 'Aceptar'
-        });
-    });
-    */
-
     // Manejo del envío del formulario
     document.getElementById('contactForm').addEventListener('submit', async function(event) {
         event.preventDefault();
