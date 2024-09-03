@@ -33,7 +33,16 @@ exports.handler = async (event, context) => {
         from: process.env.EMAIL_USER,
         to: 'fedecano1988@hotmail.com', // Reemplaza con tu dirección de correo de destino
         subject: 'Nuevo mensaje desde el formulario',
-        text: `Nombre y Apellido: ${nombreApellido}\nEmail: ${email}\nTeléfono: ${telefono}\nMensaje: ${mensaje}`
+        text: `
+            Nombre y Apellido: ${nombreApellido}
+            Email: ${email}
+            Teléfono: ${telefono}
+            Mensaje: ${mensaje}
+            Localidad: ${localidad}
+            Barrio (CABA): ${barrioCABA}
+            Localidad del Servicio: ${localidadServicio}
+            Barrio del Servicio (CABA): ${barrioCABAServicio}
+        `
     };
 
     try {
