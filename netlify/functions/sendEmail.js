@@ -64,7 +64,7 @@ exports.handler = async (event, context) => {
 
     const mailOptions = {
         from: process.env.EMAIL_USER,
-        to: 'fedecano1988@hotmail.com', // dirección de correo de destino
+        to: 'pablomoreschi@outlook.com', // dirección de correo de destino
         subject: 'Nuevo mensaje desde el formulario',
         html: emailBody // Usar el formato HTML
     };
